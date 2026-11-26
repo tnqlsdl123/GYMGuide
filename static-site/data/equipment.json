@@ -1,0 +1,514 @@
+{
+  "categories": [
+    {
+      "slug": "chest",
+      "name": "가슴"
+    },
+    {
+      "slug": "back",
+      "name": "등"
+    },
+    {
+      "slug": "shoulders",
+      "name": "어깨"
+    },
+    {
+      "slug": "legs",
+      "name": "하체"
+    },
+    {
+      "slug": "arms",
+      "name": "팔"
+    },
+    {
+      "slug": "abs",
+      "name": "복근"
+    }
+  ],
+  "equipment": [
+    {
+      "slug": "chest-press",
+      "name": "체스트 프레스",
+      "englishName": "Chest Press",
+      "category": "chest",
+      "muscles": "대흉근, 전면 삼각근, 삼두근",
+      "summary": "손잡이를 앞으로 밀어 가슴 근육을 자극하는 기구예요.",
+      "image": "images/chest-press.webp",
+      "difficulty": "초급",
+      "aliases": [],
+      "benefits": [
+        "가슴에 힘을 주어 미는 동작을 연습하고 상체의 미는 힘을 기를 수 있어요."
+      ],
+      "steps": [
+        "손잡이가 가슴 가운데 높이에 오도록 좌석을 맞추고 등을 등받이에 붙여요.",
+        "발바닥을 바닥에 두고 손목을 곧게 유지하며 손잡이를 앞으로 밀어요.",
+        "팔꿈치가 완전히 잠기기 전에 멈춘 뒤, 천천히 시작 위치로 돌아와요."
+      ],
+      "cautions": [
+        "어깨를 으쓱하거나 허리를 과하게 꺾지 않도록 가벼운 무게부터 시작하세요."
+      ],
+      "secondaryCategories": [],
+      "videos": []
+    },
+    {
+      "slug": "lat-pulldown",
+      "name": "랫 풀다운",
+      "englishName": "Lat Pulldown",
+      "category": "back",
+      "muscles": "광배근, 이두근",
+      "summary": "머리 위 바를 당겨 등 양옆에 힘을 주는 기구예요.",
+      "image": "images/lat-pulldown.webp",
+      "difficulty": "초급",
+      "aliases": [
+        "렛풀다운",
+        "레트풀다운"
+      ],
+      "benefits": [
+        "광배근 강화",
+        "등 근력 향상",
+        "상체의 당기는 힘 향상"
+      ],
+      "steps": [
+        "체형에 맞게 허벅지 고정 패드 높이를 조절해요.",
+        "바를 어깨보다 조금 넓게 잡고 가슴을 편 상태에서 앉아요.",
+        "상체를 과하게 젖히지 않고 팔꿈치를 아래로 내려 바를 윗가슴 방향으로 당겨요.",
+        "천천히 팔을 펴 시작 자세로 돌아가요."
+      ],
+      "cautions": [
+        "바를 목 뒤로 당기거나 반동을 사용하지 마세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "랫풀다운 영상 보기",
+          "url": "https://youtube.com/shorts/GlybLSEgA_M?si=SBdC08BLNbxc3yKv"
+        }
+      ]
+    },
+    {
+      "slug": "long-pull",
+      "name": "롱풀",
+      "englishName": "Seated Cable Row",
+      "category": "back",
+      "muscles": "광배근, 능형근, 중부 승모근",
+      "summary": "낮은 케이블 손잡이를 몸 쪽으로 당기는 앉은 로우 기구예요.",
+      "image": "images/long-pull.webp",
+      "difficulty": "초급",
+      "aliases": [
+        "longpull"
+      ],
+      "benefits": [
+        "광배근과 등 중앙 근육 강화",
+        "상체를 안정시킨 채 수평으로 당기는 힘 향상"
+      ],
+      "steps": [
+        "발을 발판에 올리고 무릎을 살짝 굽혀요.",
+        "팔을 뻗어 손잡이를 잡고 가슴을 가볍게 펴요.",
+        "몸통을 고정하고 팔꿈치를 뒤로 보내며 손잡이를 아랫갈비뼈 쪽으로 당겨요.",
+        "케이블의 저항을 느끼며 팔을 천천히 펴요."
+      ],
+      "cautions": [
+        "몸통을 앞뒤로 크게 흔들어 반동을 주지 마세요.",
+        "허리가 말리지 않는 범위에서 움직이세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "롱풀 영상 보기",
+          "url": "https://youtube.com/shorts/VCzlPQfT_CY?si=B175h9WPRx11HzxH"
+        }
+      ]
+    },
+    {
+      "slug": "long-pull-lat-pulldown",
+      "name": "롱풀 & 랫풀다운",
+      "englishName": "Low Row & Lat Pulldown",
+      "category": "back",
+      "muscles": "광배근, 능형근, 이두근",
+      "summary": "낮은 케이블 로우와 위쪽 케이블 풀다운을 모두 할 수 있는 기구예요.",
+      "image": "images/long-pull-lat-pulldown.webp",
+      "difficulty": "중급",
+      "aliases": [
+        "롱풀&렛풀다운",
+        "롱풀랫풀다운",
+        "롱풀렛풀다운"
+      ],
+      "benefits": [
+        "등 중앙과 양옆 근육 강화",
+        "수평과 수직 방향으로 당기는 힘 향상"
+      ],
+      "steps": [
+        "원하는 동작에 맞춰 기구 안내에서 케이블 위치와 손잡이를 확인해요.",
+        "롱풀은 발판에 발을 올리고 낮은 손잡이를 아랫갈비뼈 쪽으로 당겨요.",
+        "랫풀다운은 허벅지 패드를 맞추고 위쪽 바를 윗가슴 쪽으로 당겨요.",
+        "두 동작 모두 몸통을 안정시킨 채 팔을 천천히 펴요."
+      ],
+      "cautions": [
+        "손잡이를 바꾸기 전에 웨이트 스택이 완전히 내려왔는지 확인하세요.",
+        "연결 고리가 닫혀 있는지 확인한 뒤 시작하세요."
+      ],
+      "secondaryCategories": [],
+      "videos": []
+    },
+    {
+      "slug": "supported-row",
+      "name": "서포티드 로우",
+      "englishName": "Chest-Supported Row",
+      "category": "back",
+      "muscles": "광배근, 능형근, 중부 승모근",
+      "summary": "가슴 패드에 몸을 지지하고 손잡이를 당기는 로우 기구예요.",
+      "image": "images/supported-row.webp",
+      "difficulty": "초급",
+      "aliases": [
+        "체스트서포티드로우"
+      ],
+      "benefits": [
+        "등 중앙과 양옆 근육 강화",
+        "몸통을 고정한 상태에서 당기는 동작 연습"
+      ],
+      "steps": [
+        "가슴이 패드에 닿고 발이 바닥이나 발판에 닿도록 좌석을 조절해요.",
+        "손잡이를 잡고 어깨를 편안하게 내려요.",
+        "패드에서 가슴을 떼지 않고 팔꿈치를 뒤로 당겨요.",
+        "팔을 천천히 뻗어 손잡이를 돌려보내요."
+      ],
+      "cautions": [
+        "목을 앞으로 빼거나 어깨를 으쓱하지 마세요.",
+        "가슴이 패드에서 떨어지면 무게를 낮추세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "서포티드 로우 영상 보기",
+          "url": "https://youtube.com/shorts/H4BZGY-w6L0?si=_y0EJMQLLsNw1sbx"
+        }
+      ]
+    },
+    {
+      "slug": "lat-machine",
+      "name": "랫 머신",
+      "englishName": "Lat Machine",
+      "category": "back",
+      "muscles": "광배근, 이두근, 대원근",
+      "summary": "머리 위 레버 손잡이를 아래로 당겨 등을 쓰는 기구예요.",
+      "image": "images/lat-machine.webp",
+      "difficulty": "초급",
+      "aliases": [
+        "렛머신",
+        "레트머신"
+      ],
+      "benefits": [
+        "광배근과 등 양옆 근육 강화",
+        "위에서 아래로 당기는 힘 향상"
+      ],
+      "steps": [
+        "기구 안내에 따라 좌석과 허벅지 패드를 체형에 맞춰요.",
+        "머리 위 손잡이를 잡고 가슴을 가볍게 펴요.",
+        "팔꿈치를 옆구리 쪽으로 내려 손잡이를 당겨요.",
+        "저항을 조절하며 팔을 위로 천천히 펴요."
+      ],
+      "cautions": [
+        "손잡이를 내리려고 몸통을 뒤로 크게 젖히지 마세요.",
+        "어깨가 편안한 범위에서 움직이세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "랫 머신 영상 보기",
+          "url": "https://youtube.com/shorts/M3BTtAxUwOU?si=mF_bHcP0gSixe6Bt"
+        }
+      ]
+    },
+    {
+      "slug": "assisted-chin-dip",
+      "name": "어시스트 치닝 & 디핑",
+      "englishName": "Assisted Chin-Up & Dip",
+      "category": "back",
+      "muscles": "광배근, 이두근, 대흉근, 삼두근",
+      "summary": "보조 발판으로 체중 부담을 줄여 턱걸이와 딥스를 연습하는 기구예요.",
+      "image": "images/assisted-chin-dip.webp",
+      "difficulty": "중급",
+      "aliases": [
+        "어시스트치닝디핑",
+        "어시스트풀업",
+        "어시스트딥스"
+      ],
+      "benefits": [
+        "치닝으로 등과 위팔 앞쪽을 쓰는 당기기 동작 연습",
+        "딥스로 가슴과 위팔 뒤쪽을 쓰는 밀기 동작 연습"
+      ],
+      "steps": [
+        "기구 안내에 따라 보조 중량을 설정하고 손잡이를 단단히 잡아요.",
+        "한쪽씩 무릎이나 발을 기구 안내에 지정된 보조 패드에 올려요.",
+        "치닝은 위쪽 손잡이를 잡고 팔꿈치를 아래로 당겨 몸을 올린 뒤 천천히 내려요.",
+        "딥스는 평행 손잡이로 지지하고 편한 범위에서 팔꿈치를 굽힌 뒤 손잡이를 밀어요.",
+        "패드가 갑자기 올라오지 않도록 손잡이를 잡고 천천히 내려와요."
+      ],
+      "cautions": [
+        "이 유형의 기구는 보조 중량을 높이면 보통 동작이 쉬워져요. 기구 표시를 확인하세요.",
+        "딥스에서 어깨가 불편한 깊이까지 내려가지 마세요."
+      ],
+      "secondaryCategories": [
+        "chest",
+        "arms"
+      ],
+      "videos": [
+        {
+          "title": "딥스 영상 보기",
+          "url": "https://youtube.com/shorts/fgXadva1ahc?si=QetAIyzK0Rsr1oQe"
+        },
+        {
+          "title": "풀업 영상 보기",
+          "url": "https://youtube.com/shorts/nerHjccjzbo?si=vBxcgiR1UcsVWX5e"
+        }
+      ]
+    },
+    {
+      "slug": "shoulder-press",
+      "name": "숄더 프레스",
+      "englishName": "Shoulder Press",
+      "category": "shoulders",
+      "muscles": "삼각근, 삼두근",
+      "summary": "손잡이를 머리 위로 밀어 어깨와 팔을 단련하는 기구예요.",
+      "image": "images/shoulder-press.webp",
+      "difficulty": "초급",
+      "aliases": [],
+      "benefits": [
+        "어깨 근육과 삼두근을 사용해 위로 미는 힘을 기를 수 있어요."
+      ],
+      "steps": [
+        "손잡이가 어깨 근처에 오게 좌석을 조절하고 등을 등받이에 편하게 대요.",
+        "손목을 곧게 펴고 손잡이를 머리 위로 밀어요.",
+        "팔꿈치를 부드럽게 유지하면서 손잡이를 천천히 내려요."
+      ],
+      "cautions": [
+        "허리가 등받이에서 크게 떨어지지 않는 무게와 범위에서 움직이세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "숄더프레스 영상 보기",
+          "url": "https://youtube.com/shorts/awrvqe20cq0?si=xusm1KH2LBN6uZmd"
+        }
+      ]
+    },
+    {
+      "slug": "lateral-raise",
+      "name": "래터럴 레이즈",
+      "englishName": "Lateral Raise",
+      "category": "shoulders",
+      "muscles": "측면 삼각근",
+      "summary": "상완 패드를 양옆으로 들어 어깨 옆 근육에 힘을 주는 기구예요.",
+      "image": "images/lateral-raise.webp",
+      "difficulty": "초급",
+      "aliases": [
+        "레터럴레이즈",
+        "사이드레터럴레이즈"
+      ],
+      "benefits": [
+        "측면 삼각근 강화",
+        "팔을 옆으로 들어 올리는 동작 연습"
+      ],
+      "steps": [
+        "회전축이 어깨 높이 근처에 오도록 좌석을 조절해요.",
+        "팔을 패드에 대고 팔꿈치를 가볍게 굽혀요.",
+        "어깨를 으쓱하지 않고 위팔을 옆으로 들어 올려요.",
+        "어깨 높이보다 낮거나 같은 편안한 범위에서 멈추고 천천히 내려요."
+      ],
+      "cautions": [
+        "가벼운 무게부터 사용하세요.",
+        "목과 어깨에 힘을 주며 패드를 튕기지 마세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "래터럴 레이즈 영상 보기",
+          "url": "https://youtube.com/shorts/5UXyrIiWriM?si=ZMF_NgRZYukM_AQ4"
+        }
+      ]
+    },
+    {
+      "slug": "leg-press",
+      "name": "레그 프레스",
+      "englishName": "Leg Press",
+      "category": "legs",
+      "muscles": "대퇴사두근, 둔근",
+      "summary": "발판을 밀어 허벅지와 엉덩이를 함께 쓰는 기구예요.",
+      "image": "images/leg-press.webp",
+      "difficulty": "초급",
+      "aliases": [],
+      "benefits": [
+        "허벅지 앞쪽과 엉덩이를 사용해 하체의 밀어내는 힘을 기를 수 있어요."
+      ],
+      "steps": [
+        "등과 엉덩이를 등받이에 밀착하고 발판 중앙에 발을 어깨너비 정도로 올려요.",
+        "기구에 표시된 안전장치 사용법을 확인한 뒤, 엉덩이가 뜨지 않는 범위에서 천천히 무릎을 굽혀요.",
+        "발바닥 전체로 발판을 밀고 무릎이 완전히 펴지기 전에 멈춰요. 운동을 마치면 안전장치를 고정해요."
+      ],
+      "cautions": [
+        "무릎이 발끝과 같은 방향으로 움직이게 하세요."
+      ],
+      "secondaryCategories": [],
+      "videos": []
+    },
+    {
+      "slug": "total-hip",
+      "name": "토탈 힙",
+      "englishName": "Multi-Hip Machine",
+      "category": "legs",
+      "muscles": "둔근, 고관절 굽힘근, 내전근",
+      "summary": "서서 롤러를 밀며 방향에 따라 엉덩이와 허벅지 근육을 쓰는 기구예요.",
+      "image": "images/total-hip.webp",
+      "difficulty": "중급",
+      "aliases": [
+        "토탈힙머신",
+        "멀티힙"
+      ],
+      "benefits": [
+        "운동 방향에 따라 엉덩이와 고관절 주변 근육 강화",
+        "한쪽 다리를 움직일 때 골반을 안정시키는 동작 연습"
+      ],
+      "steps": [
+        "운동 방향을 고르고 기구 안내에 따라 축 높이와 롤러 위치를 맞춰요.",
+        "손잡이를 잡고 지지하는 발을 발판에 안정적으로 올려요.",
+        "골반과 몸통을 고정한 채 운동하는 다리로 롤러를 천천히 밀어요.",
+        "시작 자세로 천천히 돌아오고 반대쪽도 같은 방향과 범위로 운동해요."
+      ],
+      "cautions": [
+        "설정을 바꾸기 전에 조절 핀이 끝까지 고정됐는지 확인하세요.",
+        "다리를 높이 들려고 허리를 꺾거나 골반을 돌리지 마세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "토탈 힙 영상 보기",
+          "url": "https://youtu.be/GreoYFgYWI8?si=VlrvElvHMQGfBNd2"
+        }
+      ]
+    },
+    {
+      "slug": "inner-thigh",
+      "name": "이너타이",
+      "englishName": "Hip Adduction",
+      "category": "legs",
+      "muscles": "허벅지 안쪽 내전근",
+      "summary": "앉아서 양쪽 패드를 모아 허벅지 안쪽 근육을 쓰는 기구예요.",
+      "image": "images/inner-thigh.webp",
+      "difficulty": "초급",
+      "aliases": [
+        "이너싸이",
+        "힙어덕션"
+      ],
+      "benefits": [
+        "허벅지 안쪽 내전근 강화",
+        "다리를 안쪽으로 모으는 움직임 조절 연습"
+      ],
+      "steps": [
+        "등을 등받이에 대고 허벅지 안쪽을 패드에 붙여요.",
+        "발을 지지대에 올린 다음 양쪽 다리를 편안하게 벌릴 수 있는 각도를 설정해요.",
+        "몸통을 움직이지 않고 허벅지 안쪽으로 양쪽 패드를 천천히 모아요.",
+        "패드가 빠르게 벌어지지 않게 저항을 조절하며 돌아와요."
+      ],
+      "cautions": [
+        "처음부터 넓은 시작 각도나 무거운 중량을 사용하지 마세요.",
+        "사타구니가 과하게 당기는 범위까지 벌리지 마세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "이너타이 영상 보기",
+          "url": "https://youtu.be/TmUx5RzedoM?si=X_lmicoKR55Dn_mz"
+        }
+      ]
+    },
+    {
+      "slug": "arm-curl",
+      "name": "암 컬 머신",
+      "englishName": "Arm Curl Machine",
+      "category": "arms",
+      "muscles": "상완이두근",
+      "summary": "팔꿈치를 굽혀 위팔 앞쪽 근육을 자극하는 기구예요.",
+      "image": "images/arm-curl.webp",
+      "difficulty": "초급",
+      "aliases": [],
+      "benefits": [
+        "위팔을 지지한 상태에서 팔꿈치를 굽히며 이두근에 집중할 수 있어요."
+      ],
+      "steps": [
+        "위팔을 패드에 올리고 팔꿈치가 기구의 회전축 높이에 오도록 좌석을 조절해요.",
+        "손목을 곧게 유지하며 손잡이를 몸 쪽으로 들어 올려요.",
+        "위팔을 패드에 댄 채 손잡이를 천천히 내려요."
+      ],
+      "cautions": [
+        "몸통을 뒤로 젖히거나 손목을 꺾어 반동을 주지 마세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "암컬 영상 보기",
+          "url": "https://youtu.be/sIne_PgpykU?si=Pqp_M4xlEvuDhK43"
+        }
+      ]
+    },
+    {
+      "slug": "ab-crunch",
+      "name": "앱 크런치 머신",
+      "englishName": "Ab Crunch Machine",
+      "category": "abs",
+      "muscles": "복직근",
+      "summary": "몸통을 말아 복부에 힘을 주는 동작을 연습하는 기구예요.",
+      "image": "images/ab-crunch.webp",
+      "difficulty": "초급",
+      "aliases": [],
+      "benefits": [
+        "복직근을 사용해 몸통을 굽히는 동작을 천천히 연습할 수 있어요."
+      ],
+      "steps": [
+        "기구 안내에 따라 좌석과 패드 위치를 맞추고 발을 지지대에 올려요.",
+        "숨을 내쉬며 갈비뼈를 골반 쪽으로 가까이 가져온다는 느낌으로 몸통을 말아요.",
+        "복부에 힘을 유지하면서 천천히 시작 위치로 돌아와요."
+      ],
+      "cautions": [
+        "목이나 팔을 당기기보다 복부가 편하게 움직이는 범위를 사용하세요."
+      ],
+      "secondaryCategories": [],
+      "videos": []
+    },
+    {
+      "slug": "rotary-torso",
+      "name": "로타리 토르소",
+      "englishName": "Rotary Torso",
+      "category": "abs",
+      "muscles": "내복사근, 외복사근",
+      "summary": "정해진 범위에서 몸통 회전을 조절하며 옆구리 근육을 쓰는 기구예요.",
+      "image": "images/rotary-torso.webp",
+      "difficulty": "중급",
+      "aliases": [
+        "로타리토로소",
+        "로터리토르소",
+        "로터리토소"
+      ],
+      "benefits": [
+        "복사근을 사용한 몸통 회전 연습",
+        "작은 범위에서 몸통 움직임을 조절하는 힘 향상"
+      ],
+      "steps": [
+        "좌석과 패드를 맞추고 시작 각도를 작게 설정해요.",
+        "손잡이를 가볍게 잡고 다리와 등은 기구 안내대로 지지해요.",
+        "옆구리에 힘을 주고 움직이는 부분을 편한 범위에서 천천히 돌려요.",
+        "속도를 조절해 시작 위치로 돌아온 뒤 반대쪽도 같은 방식으로 운동해요."
+      ],
+      "cautions": [
+        "허리를 억지로 비틀거나 끝 범위에서 반동을 쓰지 마세요.",
+        "처음에는 가벼운 무게와 작은 범위를 사용하세요."
+      ],
+      "secondaryCategories": [],
+      "videos": [
+        {
+          "title": "로타리 토르소 영상 보기",
+          "url": "https://youtu.be/X34vfreJTfQ?si=7dc8LX3bbwKPVAk_"
+        }
+      ]
+    }
+  ]
+}

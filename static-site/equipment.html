@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>운동기구 사용법 | GYM GUIDE</title>
+    <link rel="stylesheet" href="./css/guide.css">
+    <script type="module" src="./js/equipment.js"></script>
+</head>
+<body>
+<header class="site-header">
+    <nav class="container header-inner" aria-label="메인 메뉴">
+        <a class="brand" href="./">
+            <span class="brand-mark" aria-hidden="true"><i class="dumbbell"></i></span>
+            GYM GUIDE
+        </a>
+        <div class="nav-links">
+            <a class="nav-link" href="./#equipment">운동기구 찾기</a>
+            <a class="nav-link" href="./schedule.html">헬스장 이용 시간표</a>
+        </div>
+    </nav>
+</header>
+<main class="container detail">
+    <a class="back-link" href="./#equipment">
+        <i class="chevron chevron-back" aria-hidden="true"></i> 운동기구 목록
+    </a>
+    <p id="detail-message" role="status">운동기구 정보를 불러오는 중이에요.</p>
+    <noscript><p>운동기구 정보를 확인하려면 JavaScript를 켜 주세요.</p></noscript>
+    <div id="equipment-detail" hidden>
+        <div class="detail-overview">
+            <div class="detail-media">
+                <img alt="" width="700" height="456" hidden>
+                <span>이미지 준비 중</span>
+            </div>
+            <div class="detail-intro">
+                <span class="category-tag"></span>
+                <h1></h1>
+                <p class="english-name"></p>
+                <p id="summary"></p>
+                <dl class="detail-facts">
+                    <dt>자극 부위</dt>
+                    <dd id="muscles"></dd>
+                    <dt>난이도</dt>
+                    <dd id="difficulty"></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="detail-sections">
+            <section class="guide-section" aria-labelledby="benefits-title">
+                <h2 id="benefits-title">운동 효과</h2>
+                <div class="benefits">
+                    <ul class="benefit-list"></ul>
+                    <img class="muscle-image" alt="" loading="lazy" hidden>
+                </div>
+            </section>
+            <section class="guide-section" aria-labelledby="steps-title">
+                <h2 id="steps-title">사용 방법</h2>
+                <ol class="steps" role="list"></ol>
+            </section>
+            <section class="guide-section" id="videos" aria-labelledby="videos-title" hidden>
+                <h2 id="videos-title">운동 영상</h2>
+                <div class="video-links"></div>
+            </section>
+            <section class="cautions" aria-labelledby="cautions-title">
+                <h2 id="cautions-title">주의사항</h2>
+                <ul></ul>
+            </section>
+        </div>
+    </div>
+</main>
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <a class="brand footer-brand" href="./">GYM GUIDE</a>
+        <span>운동기구 사용법 안내</span>
+    </div>
+</footer>
+</body>
+</html>
