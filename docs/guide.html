@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="운동기구를 이름이나 운동 부위로 검색하고 사용법을 확인하세요.">
+    <meta name="theme-color" content="#002D62">
+    <title>운동기구 안내 | INU GYM GUIDE</title>
+    <link rel="stylesheet" href="./css/guide.css">
+    <script type="module" src="./js/catalog.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">본문으로 바로가기</a>
+<header class="site-header">
+    <div class="container header-inner">
+        <a class="brand" href="./">
+            <span class="brand-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#campus"></use></svg></span>
+            <span class="brand-text">
+                <strong>INU GYM GUIDE</strong>
+                <small lang="en">INCHEON NATIONAL UNIVERSITY</small>
+            </span>
+        </a>
+        <nav class="desktop-nav" aria-label="메인 메뉴">
+        <a href="./"><span>홈</span></a>
+        <a href="./guide.html" aria-current="page"><span>운동기구 안내</span></a>
+        <a href="./schedule.html"><span>체육관 시간표</span></a>
+        </nav>
+    </div>
+</header>
+<nav class="mobile-nav" aria-label="메인 메뉴">
+        <a href="./"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#home"></use></svg><span>홈</span></a>
+        <a href="./guide.html" aria-current="page"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#dumbbell"></use></svg><span>운동기구</span></a>
+        <a href="./schedule.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#calendar"></use></svg><span>시간표</span></a>
+</nav>
+<main class="container content-page" id="main" tabindex="-1">
+    <header class="page-intro">
+        <span class="intro-icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#dumbbell"></use></svg></span>
+        <div><h1>운동기구 안내</h1><p>기구를 검색하거나 운동 부위를 선택해 사용법과 운동 효과를 확인하세요.</p></div>
+    </header>
+    <section class="catalog" aria-label="운동기구 목록">
+        <div class="search-panel">
+            <form class="search-form" action="./guide.html" method="get" role="search">
+                <label for="keyword" class="sr-only">운동기구 이름 또는 운동 부위 검색</label>
+                <div class="search-field">
+                    <svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#search"></use></svg>
+                    <input id="keyword" type="search" name="q" placeholder="기구 이름 또는 운동 부위 검색" autocomplete="off">
+                    <button class="icon-button clear-search" type="button" aria-label="검색어 지우기" hidden><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#close"></use></svg></button>
+                </div>
+                <input type="hidden" name="category" disabled>
+                <button class="button button-blue" type="submit">검색</button>
+            </form>
+            <nav class="filters" aria-label="운동 부위별 필터" hidden></nav>
+        </div>
+        <p class="result-count" role="status">운동기구 목록을 불러오는 중이에요.</p>
+        <div class="catalog-grid" hidden></div>
+        <div class="feedback empty" hidden>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#search"></use></svg>
+            <h2>검색 결과가 없어요</h2>
+            <p>검색어를 바꾸거나 다른 운동 부위를 선택해 보세요.</p>
+            <a class="button button-outline" href="./guide.html">전체 운동기구 보기</a>
+        </div>
+        <div class="feedback load-error" hidden>
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#info"></use></svg>
+            <p>연결 상태를 확인한 뒤 다시 시도해 주세요.</p>
+            <button class="button button-outline" type="button" data-retry>다시 불러오기</button>
+        </div>
+        <noscript><p>운동기구 목록을 보려면 JavaScript를 켜 주세요.</p></noscript>
+    </section>
+    <template id="equipment-card">
+        <article class="equipment-card">
+            <a class="card-link">
+                <div class="card-media">
+                    <img alt="" width="700" height="456" loading="lazy" hidden>
+                    <span>이미지 준비 중</span>
+                </div>
+                <div class="card-body">
+                    <span class="category-tag"></span>
+                    <h3></h3>
+                    <p class="card-muscles"></p>
+                    <p class="card-benefit"></p>
+                    <span class="card-cta" aria-hidden="true">사용법 보기 <svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#right"></use></svg></span>
+                </div>
+            </a>
+        </article>
+    </template>
+</main>
+<footer class="site-footer">
+    <div class="container footer-inner">
+        <a class="footer-brand" href="./">INU GYM GUIDE</a>
+        <p>인천대학교 학생 제작 프로젝트입니다. 대학 공식 서비스와는 별도로 운영됩니다.</p>
+    </div>
+</footer>
+</body>
+</html>

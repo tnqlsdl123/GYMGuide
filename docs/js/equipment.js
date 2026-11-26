@@ -1,9 +1,11 @@
-import { catalogLink, element, loadData, showImage } from './site.js';
+import { catalogLink, element, loadData, setupRetry, showImage } from './site.js';
 
 const params = new URLSearchParams(location.search);
 const message = document.querySelector('#detail-message');
+const state = document.querySelector('#detail-state');
 const detail = document.querySelector('#equipment-detail');
 document.querySelector('.back-link').href = catalogLink(params.get('q'), params.get('category'));
+setupRetry();
 
 function addVideos(videos) {
     const section = document.querySelector('#videos');
@@ -34,7 +36,7 @@ async function renderDetail() {
         return;
     }
 
-    document.title = item.name + ' | GYM GUIDE';
+    document.title = item.name + ' | INU GYM GUIDE';
     showImage(detail.querySelector('.detail-media'), item.image, item.name);
     detail.querySelector('.category-tag').textContent = categories.find(category => category.slug === item.category)?.name ?? '';
     detail.querySelector('h1').textContent = item.name;
@@ -62,10 +64,11 @@ async function renderDetail() {
     detail.querySelector('.cautions ul').append(...cautions.map(text => element('li', '', text)));
     addVideos(item.videos ?? []);
     detail.hidden = false;
-    message.hidden = true;
+    state.hidden = true;
 }
 
 renderDetail().catch(error => {
-    message.textContent = '운동기구 정보를 불러오지 못했어요. 페이지를 새로고침해 주세요.';
+    message.textContent = '운동기구 정보를 불러오지 못했어요.';
+    state.querySelector('[data-retry]').hidden = false;
     console.error(error);
 });

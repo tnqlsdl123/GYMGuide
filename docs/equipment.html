@@ -3,29 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>운동기구 사용법 | GYM GUIDE</title>
+    <meta name="description" content="운동기구별 운동 효과, 사용 방법과 주의사항을 확인하세요.">
+    <meta name="theme-color" content="#002D62">
+    <title>운동기구 사용법 | INU GYM GUIDE</title>
     <link rel="stylesheet" href="./css/guide.css">
     <script type="module" src="./js/equipment.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#main">본문으로 바로가기</a>
 <header class="site-header">
-    <nav class="container header-inner" aria-label="메인 메뉴">
+    <div class="container header-inner">
         <a class="brand" href="./">
-            <span class="brand-mark" aria-hidden="true"><i class="dumbbell"></i></span>
-            GYM GUIDE
+            <span class="brand-mark"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#campus"></use></svg></span>
+            <span class="brand-text">
+                <strong>INU GYM GUIDE</strong>
+                <small lang="en">INCHEON NATIONAL UNIVERSITY</small>
+            </span>
         </a>
-        <div class="nav-links">
-            <a class="nav-link" href="./#equipment">운동기구 찾기</a>
-            <a class="nav-link" href="./schedule.html">헬스장 이용 시간표</a>
-        </div>
-    </nav>
+        <nav class="desktop-nav" aria-label="메인 메뉴">
+        <a href="./"><span>홈</span></a>
+        <a href="./guide.html" aria-current="location"><span>운동기구 안내</span></a>
+        <a href="./schedule.html"><span>체육관 시간표</span></a>
+        </nav>
+    </div>
 </header>
-<main class="container detail">
-    <a class="back-link" href="./#equipment">
-        <i class="chevron chevron-back" aria-hidden="true"></i> 운동기구 목록
-    </a>
-    <p id="detail-message" role="status">운동기구 정보를 불러오는 중이에요.</p>
-    <noscript><p>운동기구 정보를 확인하려면 JavaScript를 켜 주세요.</p></noscript>
+<nav class="mobile-nav" aria-label="메인 메뉴">
+        <a href="./"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#home"></use></svg><span>홈</span></a>
+        <a href="./guide.html" aria-current="location"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#dumbbell"></use></svg><span>운동기구</span></a>
+        <a href="./schedule.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#calendar"></use></svg><span>시간표</span></a>
+</nav>
+<main class="container content-page detail" id="main" tabindex="-1">
+    <a class="text-link back-link" href="./guide.html"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#left"></use></svg> 운동기구 목록</a>
+    <div class="feedback" id="detail-state">
+        <p id="detail-message" role="status">운동기구 정보를 불러오는 중이에요.</p>
+        <button class="button button-outline" type="button" data-retry hidden>다시 불러오기</button>
+        <noscript><p>운동기구 정보를 보려면 JavaScript를 켜 주세요.</p></noscript>
+    </div>
     <div id="equipment-detail" hidden>
         <div class="detail-overview">
             <div class="detail-media">
@@ -35,43 +48,41 @@
             <div class="detail-intro">
                 <span class="category-tag"></span>
                 <h1></h1>
-                <p class="english-name"></p>
+                <p class="english-name" lang="en"></p>
                 <p id="summary"></p>
                 <dl class="detail-facts">
-                    <dt>자극 부위</dt>
-                    <dd id="muscles"></dd>
-                    <dt>난이도</dt>
-                    <dd id="difficulty"></dd>
+                    <div><dt>주요 운동 부위</dt><dd id="muscles"></dd></div>
+                    <div><dt>난이도</dt><dd id="difficulty"></dd></div>
                 </dl>
             </div>
         </div>
         <div class="detail-sections">
-            <section class="guide-section" aria-labelledby="benefits-title">
-                <h2 id="benefits-title">운동 효과</h2>
+            <section class="guide-section steps-section" aria-labelledby="steps-title">
+                <h2 id="steps-title">단계별 사용 방법</h2>
+                <ol class="steps" role="list"></ol>
+            </section>
+            <section class="guide-section benefits-section" aria-labelledby="benefits-title">
+                <h2 id="benefits-title"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#activity"></use></svg> 운동 효과</h2>
                 <div class="benefits">
                     <ul class="benefit-list"></ul>
                     <img class="muscle-image" alt="" loading="lazy" hidden>
                 </div>
             </section>
-            <section class="guide-section" aria-labelledby="steps-title">
-                <h2 id="steps-title">사용 방법</h2>
-                <ol class="steps" role="list"></ol>
+            <section class="cautions" aria-labelledby="cautions-title">
+                <h2 id="cautions-title"><svg class="icon" aria-hidden="true" focusable="false"><use href="./images/icons.svg#warning"></use></svg> 사용 시 주의사항</h2>
+                <ul></ul>
             </section>
-            <section class="guide-section" id="videos" aria-labelledby="videos-title" hidden>
+            <section class="guide-section videos-section" id="videos" aria-labelledby="videos-title" hidden>
                 <h2 id="videos-title">운동 영상</h2>
                 <div class="video-links"></div>
-            </section>
-            <section class="cautions" aria-labelledby="cautions-title">
-                <h2 id="cautions-title">주의사항</h2>
-                <ul></ul>
             </section>
         </div>
     </div>
 </main>
 <footer class="site-footer">
     <div class="container footer-inner">
-        <a class="brand footer-brand" href="./">GYM GUIDE</a>
-        <span>운동기구 사용법 안내</span>
+        <a class="footer-brand" href="./">INU GYM GUIDE</a>
+        <p>인천대학교 학생 제작 프로젝트입니다. 대학 공식 서비스와는 별도로 운영됩니다.</p>
     </div>
 </footer>
 </body>

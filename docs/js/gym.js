@@ -89,7 +89,7 @@ export function isCurrent(entry, date, now) {
     return date === now.date && appliesOn(entry, date) && includes(entry, now.second);
 }
 
-function nextRestrictionStart(entry, now) {
+function nextOccurrence(entry, now) {
     const earliest = entry.effectiveFrom > now.date ? entry.effectiveFrom : now.date;
     const offset = (weekdays.indexOf(entry.day) - dayIndex(earliest) + weekdays.length) % weekdays.length;
     let date = shiftDate(earliest, offset);
@@ -97,14 +97,22 @@ function nextRestrictionStart(entry, now) {
     return date <= entry.effectiveTo ? date + 'T' + entry.start : null;
 }
 
+function availabilityState(today, hours, second) {
+    const open = hours.filter(entry => !entry.closed && includes(entry, second));
+    if (today.some(entry => entry.usage === 'RESTRICTED' && includes(entry, second))) return 'UNAVAILABLE';
+    if (hours.length && !open.length) return 'CLOSED';
+    if (today.some(entry => entry.usage === 'UNKNOWN' && includes(entry, second))) return 'CHECK_REQUIRED';
+    if (open.some(entry => entry.scheduleConfirmed) &&
+        !today.some(entry => entry.usage !== 'NOT_RESTRICTED' && !validTimes(entry))) return 'AVAILABLE';
+    return 'UNKNOWN';
+}
+
 export function gymStatus(schedule, now) {
     const today = schedule.classes.filter(entry => appliesOn(entry, now.date));
-    const hours = hoursOn(schedule, now.date);
-    const open = hours.filter(entry => !entry.closed && includes(entry, now.second));
+    const state = availabilityState(today, hoursOn(schedule, now.date), now.second);
     const restrictions = schedule.classes.filter(entry =>
         entry.usage === 'RESTRICTED' && hasDates(entry) && weekdays.includes(entry.day) && validTimes(entry));
-    const limitedNow = today.some(entry => entry.usage === 'RESTRICTED' && includes(entry, now.second));
-    if (limitedNow) {
+    if (state === 'UNAVAILABLE') {
         let end = now.second;
         let endLabel = '';
         const ordered = restrictions.filter(entry => appliesOn(entry, now.date))
@@ -118,20 +126,79 @@ export function gymStatus(schedule, now) {
         return ['UNAVAILABLE', '현재 제한 종료 ' + monthDay(now.date) + ' ' + timeLabel(endLabel)];
     }
 
-    let state = 'UNKNOWN';
-    if (hours.length && !open.length) {
-        state = 'CLOSED';
-    } else if (today.some(entry => entry.usage === 'UNKNOWN' && includes(entry, now.second))) {
-        state = 'CHECK_REQUIRED';
-    } else if (open.some(entry => entry.scheduleConfirmed) &&
-        !today.some(entry => entry.usage !== 'NOT_RESTRICTED' && !validTimes(entry))) {
-        state = 'AVAILABLE';
-    }
-
-    const next = restrictions.map(entry => nextRestrictionStart(entry, now)).filter(Boolean).sort()[0];
+    const next = restrictions.map(entry => nextOccurrence(entry, now)).filter(Boolean).sort()[0];
     if (!next) return [state, ''];
     const [date, time] = next.split('T');
     return [state, '다음 제한 시작 ' + monthDay(date) + ' ' + timeLabel(time)];
+}
+
+function upcomingLabel(date, time) {
+    return monthDay(date, '.', '') + ' (' + weekdayLabels[dayIndex(date)] + ') ' + timeLabel(time);
+}
+
+export function nextClassLabel(schedule, now) {
+    const classes = schedule.classes.filter(entry => !entry.restrictionOnly && validTimes(entry));
+    const confirmed = classes.filter(entry => hasDates(entry) && weekdays.includes(entry.day))
+        .map(entry => ({ entry, at: nextOccurrence(entry, now) }))
+        .filter(({ at }) => at)
+        .sort((a, b) => a.at.localeCompare(b.at))[0];
+    if (confirmed) {
+        const [date, time] = confirmed.at.split('T');
+        return upcomingLabel(date, time) + ' · ' + confirmed.entry.name;
+    }
+
+    for (let offset = 0; offset <= weekdays.length; offset++) {
+        const date = shiftDate(now.date, offset);
+        const entry = entriesOn(schedule, date).find(entry =>
+            !entry.restrictionOnly && !hasDates(entry) && validTimes(entry) &&
+            (offset > 0 || timeToSeconds(entry.start) > now.second));
+        if (entry) return upcomingLabel(date, entry.start) + ' · ' + entry.name + ' (참고)';
+    }
+    return '예정된 수업 정보 없음';
+}
+
+export function availablePeriods(schedule, date) {
+    const hours = hoursOn(schedule, date);
+    const confirmedHours = hours.filter(entry => !entry.closed && entry.scheduleConfirmed);
+    if (!confirmedHours.length) return [];
+    const today = schedule.classes.filter(entry => appliesOn(entry, date));
+    const timed = [...confirmedHours, ...today.filter(validTimes)];
+    const boundaries = [...new Set(timed.flatMap(entry =>
+        [timeToSeconds(entry.start), timeToSeconds(entry.end)]))].sort((a, b) => a - b);
+    const periods = [];
+    for (let i = 0; i < boundaries.length - 1; i++) {
+        const start = boundaries[i];
+        const end = boundaries[i + 1];
+        if (availabilityState(today, hours, start) !== 'AVAILABLE') continue;
+        const previous = periods.at(-1);
+        if (previous?.end === start) previous.end = end;
+        else periods.push({ start, end });
+    }
+    return periods;
+}
+
+export function nextAvailableLabel(schedule, now, state) {
+    if (state === 'AVAILABLE') return '지금 이용 가능';
+    if (!schedule.operatingHours.some(entry => entry.scheduleConfirmed && !entry.closed)) return '확인된 이용 시간 없음';
+
+    // Active date ranges change only at their boundaries. Between them, the schedule repeats each week.
+    const anchors = new Set([now.date]);
+    for (const entry of [...schedule.operatingHours, ...schedule.classes].filter(hasDates)) {
+        if (entry.effectiveFrom > now.date) anchors.add(entry.effectiveFrom);
+        if (entry.effectiveTo >= now.date) anchors.add(shiftDate(entry.effectiveTo, 1));
+    }
+    const dates = new Set();
+    for (const anchor of anchors) {
+        for (let offset = 0; offset <= weekdays.length; offset++) dates.add(shiftDate(anchor, offset));
+    }
+    for (const date of [...dates].sort()) {
+        const period = availablePeriods(schedule, date).find(({ start }) => date !== now.date || start > now.second);
+        if (period) {
+            const time = new Date(period.start * 1000).toISOString().slice(11, 19);
+            return upcomingLabel(date, time);
+        }
+    }
+    return '확인된 이용 시간 없음';
 }
 
 export async function watchSchedule(onUpdate, onError) {
@@ -140,11 +207,16 @@ export async function watchSchedule(onUpdate, onError) {
     const description = banner.querySelector('.gym-description');
     const transition = banner.querySelector('.gym-transition');
     const checked = banner.querySelector('.gym-checked');
+    const nextClass = banner.querySelector('.next-class');
+    const nextAvailable = banner.querySelector('.next-available');
+    let schedule;
 
-    try {
-        const schedule = await loadData('schedule.json');
-        function update() {
-            const now = seoulNow();
+    function update() {
+        const now = seoulNow();
+        const clock = now.time.slice(0, 5);
+        checked.dateTime = now.date + 'T' + clock + '+09:00';
+        if (checked.textContent !== clock) checked.textContent = clock;
+        if (schedule) {
             const [state, next] = gymStatus(schedule, now);
             banner.dataset.status = state;
             const [label, details] = statusLabels[state];
@@ -152,22 +224,32 @@ export async function watchSchedule(onUpdate, onError) {
             description.textContent = details;
             transition.textContent = next;
             transition.hidden = !next;
-            checked.dateTime = now.date + 'T' + now.time + '+09:00';
-            checked.textContent = monthDay(now.date) + ' ' + now.time.slice(0, 5) + ' KST 기준';
-            checked.hidden = false;
+            if (nextClass) nextClass.textContent = nextClassLabel(schedule, now);
+            if (nextAvailable) nextAvailable.textContent = nextAvailableLabel(schedule, now, state);
             onUpdate?.(schedule, now);
         }
+    }
+
+    update();
+    try {
+        schedule = await loadData('schedule.json');
         update();
-        window.setInterval(() => {
-            if (!document.hidden) update();
-        }, 1000);
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) update();
-        });
     } catch (error) {
+        schedule = null;
+        banner.dataset.status = 'UNKNOWN';
         badge.textContent = '확인 필요';
-        description.textContent = '일정 정보를 불러오지 못했어요. 페이지를 새로고침해 주세요.';
+        description.textContent = '일정 정보를 불러오지 못했어요.';
+        transition.hidden = true;
+        if (nextClass) nextClass.textContent = '확인할 수 없음';
+        if (nextAvailable) nextAvailable.textContent = '확인할 수 없음';
+        banner.querySelector('[data-retry]').hidden = false;
         onError?.();
         console.error(error);
     }
+    window.setInterval(() => {
+        if (!document.hidden) update();
+    }, 1000);
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) update();
+    });
 }

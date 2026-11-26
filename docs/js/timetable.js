@@ -1,18 +1,22 @@
-import { element } from './site.js';
+import { element, setupRetry } from './site.js';
 import {
-    dayIndex, entriesOn, hasDates, hoursOn, isCurrent, monthDay, shiftDate,
+    availablePeriods, dayIndex, entriesOn, hasDates, isCurrent, monthDay, shiftDate,
     timeRange, timeToSeconds, usageLabels, watchSchedule, weekdayLabels, weekdays
 } from './gym.js';
 
 const week = document.querySelector('#week');
 const tabs = document.querySelector('.schedule-tabs');
 const calendar = document.querySelector('.calendar');
+const loadState = document.querySelector('#schedule-state');
+const today = document.querySelector('#today');
 const todayDate = document.querySelector('#today-date');
 const todayList = document.querySelector('.today-list');
 const todayEmpty = document.querySelector('.schedule-empty');
 const weekdayColumns = weekdays.slice(0, 5);
 let currentDate;
 let currentMarkers = [];
+let nowMarker;
+setupRetry();
 
 function showDay() {
     const requestedDay = new URLSearchParams(location.search).get('day');
@@ -73,12 +77,18 @@ function createEvent({ entry, lane, top, bottom }, date, laneCount) {
 function createDay(schedule, date, day, position) {
     const column = element('section', 'calendar-day');
     const label = weekdayLabels[weekdayColumns.indexOf(day)];
+    const isToday = date === currentDate;
+    const heading = element('h3', 'calendar-header', label + '요일');
+    if (isToday) {
+        column.classList.add('is-today');
+        heading.append(element('span', 'calendar-today', '오늘'));
+    }
     column.dataset.day = day;
-    column.setAttribute('aria-label', label + '요일');
+    column.setAttribute('aria-label', monthDay(date) + ' ' + label + '요일');
     const track = element('div', 'calendar-track');
-    column.append(element('h3', 'calendar-header', label), track);
+    column.append(heading, track);
 
-    for (const hours of hoursOn(schedule, date).filter(hours => !hours.closed && hours.scheduleConfirmed)) {
+    for (const hours of availablePeriods(schedule, date)) {
         const top = position(hours.start);
         const bottom = position(hours.end);
         if (bottom <= top) continue;
@@ -93,8 +103,8 @@ function createDay(schedule, date, day, position) {
     const blocks = [];
     const extra = element('ul', 'calendar-extra');
     for (const entry of entriesOn(schedule, date)) {
-        const top = position(entry.start);
-        const bottom = position(entry.end);
+        const top = position(timeToSeconds(entry.start));
+        const bottom = position(timeToSeconds(entry.end));
         if (!(bottom > top)) {
             const line = element('li');
             const reference = hasDates(entry) ? '' : ' · 적용 기간 미확인';
@@ -112,6 +122,12 @@ function createDay(schedule, date, day, position) {
         blocks.push({ entry, lane, top, bottom });
     }
     track.append(...blocks.map(block => createEvent(block, date, laneEnds.length)));
+    if (isToday) {
+        nowMarker = element('div', 'calendar-now');
+        nowMarker.hidden = true;
+        nowMarker.setAttribute('aria-hidden', 'true');
+        track.append(nowMarker);
+    }
     if (extra.childElementCount) column.append(extra);
     return column;
 }
@@ -122,6 +138,7 @@ function render(schedule, date) {
         throw new Error('Invalid timetable display hours');
     }
     currentMarkers = [];
+    nowMarker = null;
     currentDate = date;
     todayDate.dateTime = date;
     todayDate.textContent = monthDay(date) + ' (' + weekdayLabels[dayIndex(date)] + ')';
@@ -129,12 +146,12 @@ function render(schedule, date) {
     todayList.replaceChildren(...entries.map(createTodayEntry));
     todayList.hidden = entries.length === 0;
     todayEmpty.hidden = entries.length > 0;
-    todayEmpty.textContent = '오늘 표시할 일정이 없습니다. 이용 여부는 위의 운영 안내를 확인하세요.';
+    today.hidden = false;
 
     const monday = shiftDate(date, -dayIndex(date));
     document.querySelector('#week-range').textContent =
         monthDay(monday, '.', '') + '–' + monthDay(shiftDate(monday, 4), '.', '');
-    const position = time => Math.max(0, Math.min(100, (timeToSeconds(time) / 3600 - start) * 100 / (end - start)));
+    const position = second => Math.max(0, Math.min(100, (second / 3600 - start) * 100 / (end - start)));
 
     const axis = element('div', 'calendar-axis');
     const track = element('div', 'calendar-track');
@@ -152,9 +169,13 @@ function render(schedule, date) {
         const link = element('a', 'filter', weekdayLabels[index]);
         link.href = './schedule.html?day=' + day + '#week';
         link.dataset.day = day;
+        const isToday = day === weekdays[dayIndex(date)];
+        link.classList.toggle('is-today', isToday);
+        link.setAttribute('aria-label', weekdayLabels[index] + '요일' + (isToday ? ', 오늘' : ''));
         return link;
     }));
     showDay();
+    loadState.hidden = true;
     week.hidden = false;
 }
 
@@ -168,14 +189,20 @@ tabs.addEventListener('click', event => {
 
 watchSchedule((schedule, now) => {
     if (now.date !== currentDate) render(schedule, now.date);
+    if (nowMarker) {
+        const start = schedule.displayStartHour * 3600;
+        const end = schedule.displayEndHour * 3600;
+        nowMarker.hidden = now.second < start || now.second >= end;
+        if (!nowMarker.hidden) nowMarker.style.top = ((now.second - start) * 100 / (end - start)) + '%';
+    }
     for (const { node, entry, date, live } of currentMarkers) {
         const active = isCurrent(entry, date, now);
         node.classList.toggle('is-current', active);
         if (live) live.hidden = !active;
     }
 }, () => {
-    todayEmpty.textContent = '일정을 불러오지 못했어요. 페이지를 새로고침해 주세요.';
-    todayEmpty.hidden = false;
-    todayList.hidden = true;
+    loadState.textContent = '주간 시간표를 표시할 수 없어요.';
+    loadState.hidden = false;
+    today.hidden = true;
     week.hidden = true;
 });
